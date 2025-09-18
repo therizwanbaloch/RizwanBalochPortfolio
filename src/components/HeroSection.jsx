@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import profilePic from '../assets/Profile.jpg'; 
-import resumeFile from '../assets/Profile.jpg'; 
+import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   const leftRef = useRef(null);
@@ -29,25 +29,25 @@ const HeroSection = () => {
         </h1>
 
         <p className="text-white text-base md:text-2xl mt-6 max-w-2xl">
-          I am a Full-Stack MERN Developer — skilled in both Front-End and Back-End development. I build responsive, modern, and efficient web applications using MongoDB, Express.js, React, and Node.js.
+          I am a Full-Stack MERN Developer and Freelance Web Developer. I specialize in creating responsive, modern, and efficient web applications using MongoDB, Express.js, React, and Node.js, helping businesses and individuals turn their ideas into high-impact online solutions.
         </p>
 
         {/* buttons */}
         <div className="mt-8 flex flex-col sm:flex-row gap-4">
           <a
-            href={resumeFile}
-            download="Rizwan-Baloch-Resume"
+            href="/Resume.pdf" // ✅ served from public folder
+            download="Rizwan_Baloch_Resume.pdf"
             className="inline-block bg-orange-500 text-black font-semibold rounded-lg px-8 py-3 hover:bg-white hover:text-orange-500 transition duration-300"
           >
             Download Resume
           </a>
 
-          <a
-            href="#projects"
+          <Link
+            to="/projects"
             className="inline-block border border-orange-500 text-orange-500 font-semibold rounded-lg px-8 py-3 hover:bg-orange-500 hover:text-black transition duration-300"
           >
             View Projects
-          </a>
+          </Link>
         </div>
       </motion.div>
 

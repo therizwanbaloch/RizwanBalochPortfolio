@@ -12,13 +12,13 @@ const Navbar = () => {
         {/* Logo */}
         <h1 className="text-xl font-bold text-orange-500">Rizwan Baloch</h1>
 
-        {/* Hamburger Button*/}
+        {/* Hamburger Button */}
         <button
           onClick={toggleMenu}
           className="md:hidden text-white focus:outline-none"
           aria-label="Toggle Menu"
         >
-          {/* Hamburger*/}
+          {/* Hamburger */}
           <svg
             className="w-6 h-6"
             fill="none"
@@ -44,12 +44,20 @@ const Navbar = () => {
           </svg>
         </button>
 
-        {/* Desktop Nav navigation navbar here */}
+        {/* Desktop Nav */}
         <div className="hidden md:flex items-center space-x-6">
-          <Link to="/" className="hover:text-orange-500 transition duration-200">Home</Link>
-          <Link to="/projects" className="hover:text-orange-500 transition duration-200">Projects</Link>
-          <Link to="/contact" className="hover:text-orange-500 transition duration-200">Contact Us</Link>
-          <Link to="/reviews" className="hover:text-orange-500 transition duration-200">Testimonials</Link>
+          <Link to="/" className="hover:text-orange-500 transition duration-200">
+            Home
+          </Link>
+          <Link to="/projects" className="hover:text-orange-500 transition duration-200">
+            Projects
+          </Link>
+          <Link to="/contact" className="hover:text-orange-500 transition duration-200">
+            Contact Us
+          </Link>
+          <Link to="/reviews" className="hover:text-orange-500 transition duration-200">
+            Testimonials
+          </Link>
           <Link
             to="/hireme"
             className="bg-orange-500 text-black px-4 py-2 rounded hover:bg-white hover:text-orange-500 transition duration-200"
@@ -59,13 +67,46 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* mobile view hamburger option */}
+      {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden px-4 pb-4 space-y-2 bg-black">
-          <Link to="/" onClick={toggleMenu} className="block hover:text-orange-500 transition duration-200">Home</Link>
-          <Link to="/projects" onClick={toggleMenu} className="block hover:text-orange-500 transition duration-200">Projects</Link>
-          <Link to="/contact" onClick={toggleMenu} className="block hover:text-orange-500 transition duration-200">Contact Us</Link>
-          <Link to="/reviews" onClick={toggleMenu} className="block hover:text-orange-500 transition duration-200">Testimonials</Link>
+        <div
+          className="
+            md:hidden 
+            px-4 pb-4 space-y-2 
+            bg-black/40 
+            backdrop-blur-md 
+            border-t border-white/10
+            transition-all duration-300
+          "
+        >
+          <Link
+            to="/"
+            onClick={toggleMenu}
+            className="block hover:text-orange-500 transition duration-200"
+          >
+            Home
+          </Link>
+          <Link
+            to="/projects"
+            onClick={toggleMenu}
+            className="block hover:text-orange-500 transition duration-200"
+          >
+            Projects
+          </Link>
+          <Link
+            to="/contact"
+            onClick={toggleMenu}
+            className="block hover:text-orange-500 transition duration-200"
+          >
+            Contact Us
+          </Link>
+          <Link
+            to="/reviews"
+            onClick={toggleMenu}
+            className="block hover:text-orange-500 transition duration-200"
+          >
+            Testimonials
+          </Link>
           <Link
             to="/hireme"
             onClick={toggleMenu}
