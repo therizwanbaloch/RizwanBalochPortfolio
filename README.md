@@ -1,76 +1,47 @@
-# Rizwan Baloch Portfolio
+# Hi, I'm Rizwan Baloch  
 
-Welcome to my portfolio repository! This is a showcase of my web development projects, skills, and experiences.
-
----
-
-## 🚀 About Me
-Hi! I am **Rizwan Baloch**, a passionate **Full-Stack Developer (MERN)** focused on creating modern, responsive, and user-friendly web applications. I love building solutions that connect users and technology seamlessly.
-
-- 🎓 BS Software Engineering (Islamia University of Bahawalpur, 2026)  
-- 💻 Specialization: **Frontend & Backend Development**  
-- 📧 Contact form powered by **EmailJS** (no backend required in this portfolio)  
+**Full Stack Web Developer** | MERN STACK |  ReactJS | TailwindCSS | NodeJS | ExpressJS | MongoDB | GEN-AI Aspirant | Building modern, scalable, and user-friendly web applications
 
 ---
 
-## 🛠 Skills
-
-**Frontend:**
-- React.js, JavaScript (ES6+), HTML5, CSS3, Tailwind CSS  
-- Responsive Design, Flexbox, Grid, Animations  
-
-**Backend:**
-- Node.js, Express.js, MongoDB  
-- RESTful APIs, CRUD operations, JWT Authentication  
-
-**Tools & Others:**
-- Git & GitHub, VSCode, Figma  
-- Deployment: Netlify, Vercel, Heroku  
+## About Me
+- Exploring advanced **React.js, Next.js, and Python integrations**  
+- Skilled in **MongoDB, Express.js, React.js, Node.js, TailwindCSS, Python**  
+- Passionate about creating **real-world projects** that solve problems  
+- Goal: To grow as a full-stack developer and contribute to impactful projects  
 
 ---
 
-## 📂 Projects
-
-### Featured Projects
-
-1. **Local Restaurant Website – Pakistan**  
-   [Live Demo](https://www.thaliipk.com/)  
-   A modern, mobile-friendly restaurant website built to boost online orders and brand presence.
-
-2. **Online Boutique Store – USA**  
-   [Live Demo](https://www.shopwithshari.net/)  
-   An elegant e-commerce platform helping boutique brands showcase & sell products online.
-
-3. **Bakery & Café Website – USA**  
-   [Live Demo](https://www.2tarts.com/)  
-   A fresh, responsive site for a US-based bakery to attract more customers and simplify menus.
-
-4. **Pub & Restaurant Platform – USA**  
-   [Live Demo](https://littlepub.com/)  
-   Developed a professional restaurant platform for an American pub to improve user experience and drive reservations.
-
-5. **Multi-brand Local Marketplace – USA**  
-   [Live Demo](https://madeinkc.co/)  
-   Designed a marketplace platform for multiple local brands in the USA to showcase products and increase online sales.
+## Tech Stack
+- **Frontend:** React.js, Next.js, TailwindCSS, Bootstrap, HTML5, CSS3  
+- **Backend:** Node.js, Express.js, Python  
+- **Database:** MongoDB  
+- **Other Tools:** Git, GitHub, Postman, VS Code  
 
 ---
 
-## 📫 Contact Me
-
-- LinkedIn: [therizwanbaloch](https://linkedin.com/in/therizwanbaloch)  
-- GitHub: [therizwanbaloch](https://github.com/therizwanbaloch)  
-- Email: comraderizwanbaloch@gmail.com  
-- WhatsApp: [+92 312 7130457](https://wa.me/923127130457)  
-
-**Contact Form:** Implemented using **EmailJS** — no server needed for this portfolio.
+## Featured Projects
+-  [**Gappotaran Chat App**](#) – Real-time chat application using Socket.io & MERN stack  
+-  [**Food Delivery Website**](#) – End-to-end food ordering platform with authentication & cart system  
+-  [**Content Streaming Website**](#) – Stream videos/content with user accounts & MongoDB backend  
+-  [**NoteForge Notes App**](https://noteforge-lilac.vercel.app/) – A productivity app to create, edit & manage notes securely  
+-  [**Personal Portfolio Website**](https://rizwanbalochportfolio.netlify.app/) – Showcasing my work, skills, and contact info  
 
 ---
 
-## ⚡ Deployment
+## GitHub Stats
+![Rizwan's GitHub stats](https://github-readme-stats.vercel.app/api?username=therizwanbaloch&show_icons=true&theme=tokyonight)  
 
-This portfolio is built with **React.js** and **Tailwind CSS**.  
+![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=therizwanbaloch&layout=compact&theme=tokyonight)  
 
-- Build: `npm run build`  
-- Deployment: [Netlify / Vercel / GitHub Pages]  
+---
 
-**SPA Routing Redirects (Netlify):**
+##  Connect With Me
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/therizwanbaloch)  
+[![GitHub](https://img.shields.io/badge/GitHub-000?style=for-the-badge&logo=github)](https://github.com/therizwanbaloch)  
+[![Email](https://img.shields.io/badge/Email-red?style=for-the-badge&logo=gmail)](mailto:comraderizwanbaloch@gmail.com)  
+[![WhatsApp](https://img.shields.io/badge/WhatsApp-Chat%20Now-brightgreen?logo=whatsapp&logoColor=white)](https://wa.me/923127130457?text=Hello%20Rizwan%2C%20I%20found%20your%20GitHub%20profile%20and%20would%20like%20to%20connect!)
+
+
+---
+ _“Code, Learn, Build, Repeat.”_
