@@ -73,11 +73,15 @@ const Navbar = () => {
 
               <a
                 href="/resume.pdf"
-                download="Rizwan_Baloch.pdf"
-                style={{ backgroundColor: theme.primary }}
-                className="flex items-center gap-2 rounded-full px-5 py-2 text-sm font-bold text-white shadow-md hover:brightness-110 transition"
+                download="Rizwan_Baloch_Resume.pdf"
+                className="flex items-center justify-center gap-3 font-bold rounded-full px-5 py-2 text-sm transition hover:bg-gray-500/5"
+                style={{ 
+                  border: `2px solid ${theme.border}`, 
+                  backgroundColor: theme.primary, 
+                  color: "white" 
+                }}
               >
-                <FiDownload /> Resume
+                <FiDownload /> Get Resume
               </a>
             </div>
           </div>
@@ -115,12 +119,16 @@ const Navbar = () => {
           ))}
 
           <a
-            href="/resume.pdf"
-            download="Rizwan_Baloch.pdf"
-            className="flex items-center justify-center gap-2 mt-4 w-full rounded-xl py-4 text-center text-lg font-bold text-white"
-            style={{ backgroundColor: theme.primary }}
+            href="Resume.pdf"
+            download="Rizwan_Baloch_Resume.pdf"
+            className="flex items-center justify-center gap-3 mt-4 w-full rounded-full py-4 text-center text-lg font-bold transition hover:bg-gray-500/5"
+            style={{ 
+              border: `2px solid ${theme.border}`, 
+              backgroundColor: theme.primary, 
+              color: "white" 
+            }}
           >
-            <FiDownload /> Download Resume
+            <FiDownload /> Get Resume
           </a>
         </div>
       </div>
