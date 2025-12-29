@@ -1,121 +1,129 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { FiMenu, FiX, FiSun, FiMoon, FiDownload } from "react-icons/fi";
+import useTheme from "../context/ThemeContext";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { theme, isDarkMode, toggleTheme } = useTheme();
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
+  const handleScroll = (id) => {
+    setIsOpen(false);
+    const element = document.getElementById(id);
+    if (element) element.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const navLinks = [
+    { label: "Home", id: "home" },
+    { label: "About", id: "about" },
+    { label: "Projects", id: "projects" },
+    { label: "Skills", id: "skills" },
+    { label: "Contact", id: "contact" },
+  ];
+
   return (
-    <nav className="sticky top-0 bg-black text-white shadow-md z-50">
-      <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
-        {/* Logo */}
-        <h1 className="text-xl font-bold text-orange-500">Rizwan Baloch</h1>
-
-        {/* Hamburger Button */}
-        <button
-          onClick={toggleMenu}
-          className="md:hidden text-white focus:outline-none"
-          aria-label="Toggle Menu"
-        >
-          {/* Hamburger */}
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
+    <nav
+      style={{
+        backgroundColor: `${theme.background}E6`,
+        borderBottom: `1px solid ${theme.border}`,
+      }}
+      className="sticky top-0 z-50 w-full backdrop-blur-lg"
+    >
+      <div className="mx-auto max-w-7xl px-4">
+        <div className="flex h-16 items-center justify-between">
+          <button
+            onClick={() => handleScroll("home")}
+            className="flex items-center gap-2 group cursor-pointer"
           >
-            {isOpen ? (
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
-            ) : (
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            )}
-          </svg>
-        </button>
+            <div
+              style={{ backgroundColor: theme.primary }}
+              className="flex h-9 w-9 items-center justify-center rounded-xl text-white font-bold shadow-md group-hover:rotate-12 transition"
+            >
+              R
+            </div>
+            <span
+              style={{ color: theme.textMain }}
+              className="hidden sm:block text-xl font-bold"
+            >
+              Rizwan <span style={{ color: theme.primary }}>Baloch</span>
+            </span>
+          </button>
 
-        {/* Desktop Nav */}
-        <div className="hidden md:flex items-center space-x-6">
-          <Link to="/" className="hover:text-orange-500 transition duration-200">
-            Home
-          </Link>
-          <Link to="/projects" className="hover:text-orange-500 transition duration-200">
-            Projects
-          </Link>
-          <Link to="/contact" className="hover:text-orange-500 transition duration-200">
-            Contact Us
-          </Link>
-          <Link to="/reviews" className="hover:text-orange-500 transition duration-200">
-            Testimonials
-          </Link>
-          <Link
-            to="/hireme"
-            className="bg-orange-500 text-black px-4 py-2 rounded hover:bg-white hover:text-orange-500 transition duration-200"
-          >
-            Hire Me
-          </Link>
+          <div className="hidden md:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <button
+                key={link.id}
+                onClick={() => handleScroll(link.id)}
+                style={{ color: theme.textSecondary }}
+                className="text-sm font-semibold transition hover:text-orange-500"
+              >
+                {link.label}
+              </button>
+            ))}
+
+            <div className="flex items-center gap-4 border-l pl-6" style={{ borderColor: theme.border }}>
+              <button
+                onClick={toggleTheme}
+                style={{ color: theme.textSecondary }}
+                className="rounded-full p-2 hover:bg-gray-500/10 transition"
+              >
+                {isDarkMode ? <FiSun size={20} /> : <FiMoon size={20} />}
+              </button>
+
+              <a
+                href="/resume.pdf"
+                download="Rizwan_Baloch.pdf"
+                style={{ backgroundColor: theme.primary }}
+                className="flex items-center gap-2 rounded-full px-5 py-2 text-sm font-bold text-white shadow-md hover:brightness-110 transition"
+              >
+                <FiDownload /> Resume
+              </a>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-4 md:hidden">
+            <button onClick={toggleTheme} style={{ color: theme.textSecondary }}>
+              {isDarkMode ? <FiSun size={22} /> : <FiMoon size={22} />}
+            </button>
+            <button onClick={toggleMenu} style={{ color: theme.textMain }}>
+              {isOpen ? <FiX size={28} /> : <FiMenu size={28} />}
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      {isOpen && (
-        <div
-          className="
-            md:hidden 
-            px-4 pb-4 space-y-2 
-            bg-black/40 
-            backdrop-blur-md 
-            border-t border-white/10
-            transition-all duration-300
-          "
-        >
-          <Link
-            to="/"
-            onClick={toggleMenu}
-            className="block hover:text-orange-500 transition duration-200"
+      <div
+        className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+          isOpen ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"
+        }`}
+        style={{
+          backgroundColor: theme.background,
+          borderTop: `1px solid ${theme.border}`,
+        }}
+      >
+        <div className="flex flex-col space-y-2 px-4 pb-8 pt-4">
+          {navLinks.map((link) => (
+            <button
+              key={link.id}
+              onClick={() => handleScroll(link.id)}
+              className="text-left py-3 text-lg font-medium"
+              style={{ color: theme.textMain, borderBottom: `1px solid ${theme.border}33` }}
+            >
+              {link.label}
+            </button>
+          ))}
+
+          <a
+            href="/resume.pdf"
+            download="Rizwan_Baloch.pdf"
+            className="flex items-center justify-center gap-2 mt-4 w-full rounded-xl py-4 text-center text-lg font-bold text-white"
+            style={{ backgroundColor: theme.primary }}
           >
-            Home
-          </Link>
-          <Link
-            to="/projects"
-            onClick={toggleMenu}
-            className="block hover:text-orange-500 transition duration-200"
-          >
-            Projects
-          </Link>
-          <Link
-            to="/contact"
-            onClick={toggleMenu}
-            className="block hover:text-orange-500 transition duration-200"
-          >
-            Contact Us
-          </Link>
-          <Link
-            to="/reviews"
-            onClick={toggleMenu}
-            className="block hover:text-orange-500 transition duration-200"
-          >
-            Testimonials
-          </Link>
-          <Link
-            to="/hireme"
-            onClick={toggleMenu}
-            className="block bg-orange-500 text-black px-4 py-2 rounded hover:bg-white hover:text-orange-500 transition duration-200"
-          >
-            Hire Me
-          </Link>
+            <FiDownload /> Download Resume
+          </a>
         </div>
-      )}
+      </div>
     </nav>
   );
 };
