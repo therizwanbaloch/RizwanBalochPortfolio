@@ -72,7 +72,7 @@ const Navbar = () => {
               </button>
 
               <a
-                href="/resume.pdf"
+                href="/Resume.pdf"
                 download="Rizwan_Baloch_Resume.pdf"
                 className="flex items-center justify-center gap-3 font-bold rounded-full px-5 py-2 text-sm transition hover:bg-gray-500/5"
                 style={{ 

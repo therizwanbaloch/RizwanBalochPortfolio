@@ -10,19 +10,19 @@ const Projects = () => {
 
   const projectsData = [
     {
+      title: "PKRSPOT",
+      description: "A crypto-to-PKR exchange platform with real-time rate tracking and secure transaction flows.",
+      link: "https://pkrspot.vercel.app",
+      tech: ["React", "Node.js", "RestAPI"],
+      type: "Finance App"
+    },
+    {
       title: "Gap-o-Taran",
       description: "A real-time chat application featuring instant messaging, active status, and secure communication channels.",
       link: "https://gap-o-taran.vercel.app",
       tech: ["Socket.io", "Redux", "MongoDB", "Node.js"],
       type: "Real-time Chat",
       specialIcon: <FiMessageSquare />
-    },
-    {
-      title: "PKRSPOT",
-      description: "A crypto-to-PKR exchange platform with real-time rate tracking and secure transaction flows.",
-      link: "https://pkrspot.vercel.app",
-      tech: ["React", "Node.js", "Crypto API"],
-      type: "Finance App"
     },
     {
       title: "Balochistan Bazaar",
@@ -34,16 +34,16 @@ const Projects = () => {
     {
       title: "NoteForge",
       description: "Professional note-taking software with markdown support and organizational workspace features.",
-      link: "https://noteforge.vercel.app",
-      tech: ["React", "Firebase", "Rich Text"],
+      link: "https://noteforge-rizu.vercel.app",
+      tech: ["React", "mongoDB", "RestAPIs", "TailwindCSS"],
       type: "Software / SaaS"
     },
     {
       title: "Zaant AI",
       description: "Modern AI landing page and dashboard frontend with high-performance animations.",
       link: "https://zaant.vercel.app",
-      tech: ["React", "Framer Motion", "AI/UI"],
-      type: "Frontend/AI"
+      tech: ["React", "Google Gemini API", "TailwindCSS", "mongoDB"],
+      type: "Frontend"
     }
   ];
 
@@ -125,8 +125,8 @@ const Projects = () => {
               href="https://rizwanbalochportfolio.netlify.app" 
               target="_blank"
               rel="noreferrer"
-              style={{ backgroundColor: theme.primary, color: '#fff' }}
-              className="px-8 py-4 rounded-2xl font-bold flex items-center gap-3 hover:scale-105 transition-transform shadow-lg"
+              style={{ backgroundColor: theme.primary, color: '#fff', zIndex: 20 }}
+              className="px-8 py-4 rounded-2xl font-bold flex items-center gap-3 hover:scale-105 transition-transform shadow-lg relative"
             >
               Current Link <FiExternalLink />
             </a>
@@ -159,8 +159,8 @@ const Projects = () => {
                     href={project.link} 
                     target="_blank" 
                     rel="noreferrer"
-                    style={{ color: theme.textMain, backgroundColor: theme.border + '30' }}
-                    className="hover:scale-110 transition-transform p-3 rounded-full border border-transparent hover:border-indigo-500"
+                    style={{ color: theme.textMain, backgroundColor: theme.border + '30', zIndex: 20 }}
+                    className="hover:scale-110 transition-transform p-3 rounded-full border border-transparent hover:border-indigo-500 relative"
                   >
                     <FiExternalLink size={22} />
                   </a>
