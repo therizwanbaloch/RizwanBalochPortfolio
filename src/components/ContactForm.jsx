@@ -52,7 +52,8 @@ const ContactForm = () => {
       style={{ backgroundColor: theme.background }}
       className="relative flex items-center justify-center min-h-screen py-16 px-6 overflow-hidden transition-colors duration-500"
     >
-      {/* --- SNOWFALL EFFECT --- */}
+      
+
       <div className="absolute inset-0 pointer-events-none z-0">
         {particles.map((_, i) => {
           const size = Math.random() * 6 + 4;
@@ -84,7 +85,8 @@ const ContactForm = () => {
         })}
       </div>
 
-      {/* --- FORM CARD --- */}
+
+
       <motion.div
         ref={formRef}
         initial={{ opacity: 0, y: 50 }}
@@ -183,7 +185,8 @@ const ContactForm = () => {
           </motion.button>
         </form>
 
-        {/* --- TOAST NOTIFICATION --- */}
+        
+        
         <AnimatePresence>
           {toast.show && (
             <motion.div

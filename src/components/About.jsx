@@ -23,7 +23,9 @@ const About = () => {
       className="py-20 px-4 md:py-24 md:px-16 lg:px-24 transition-colors duration-500 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto">
-        {/* Section Header */}
+        
+
+        
         <motion.div 
           className="mb-12 md:mb-16 text-center lg:text-left"
           initial={{ opacity: 0, y: 20 }}
@@ -41,7 +43,9 @@ const About = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           
-          {/* Left: Narrative */}
+        
+
+
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
@@ -55,7 +59,8 @@ const About = () => {
               Whether it’s architecting a complex backend with <span className="font-bold" style={{ color: theme.textMain }}>Node.js</span> or crafting smooth mobile interfaces using <span className="font-bold" style={{ color: theme.primary }}>React Native</span>, I strive for clean code and performance.
             </p>
 
-            {/* Responsive Tag Container */}
+            
+
             <div className="flex flex-wrap justify-center lg:justify-start gap-2 md:gap-3">
               {['Architecture', 'Backend', 'API', 'Mobile UX'].map((tag) => (
                 <span 
@@ -73,7 +78,9 @@ const About = () => {
             </div>
           </motion.div>
 
-          {/* Right: Stats Grid */}
+          
+
+
           <motion.div 
             className="grid grid-cols-2 gap-4 md:gap-6 order-1 lg:order-2"
             initial={{ opacity: 0, scale: 0.9 }}

@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { FiLinkedin, FiGithub, FiMessageCircle } from "react-icons/fi";
 import useTheme from "../context/ThemeContext";
 
-// --- SUB-COMPONENT: ICON LINK ---
+
 const IconLink = ({ href, label, icon, theme }) => (
   <a
     href={href}
@@ -21,7 +21,7 @@ const IconLink = ({ href, label, icon, theme }) => (
   </a>
 );
 
-// --- COMPONENT: FOOTER ---
+
 const Footer = () => {
   const { theme } = useTheme();
 
@@ -34,7 +34,9 @@ const Footer = () => {
       className="relative z-10 py-12 px-6 md:px-16 lg:px-24 transition-colors duration-500"
     >
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
-        {/* Identity */}
+      
+
+
         <div className="text-center md:text-left order-2 md:order-1">
           <h1 style={{ color: theme.textMain }} className="text-2xl font-black tracking-tighter italic uppercase">
             Rizwan <span style={{ color: theme.primary }}>Baloch.</span>
@@ -44,7 +46,7 @@ const Footer = () => {
           </p>
         </div>
 
-        {/* Navigation */}
+        
         <div className="order-1 md:order-2">
           <ul className="flex flex-wrap justify-center gap-6 md:gap-8">
             {["Home", "Projects", "Contact"].map((item) => (
@@ -61,7 +63,6 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* Socials */}
         <div className="flex items-center gap-4 order-3">
           <IconLink href="https://linkedin.com/in/therizwanbaloch" label="LinkedIn" icon={<FiLinkedin />} theme={theme} />
           <IconLink href="https://github.com/therizwanbaloch" label="GitHub" icon={<FiGithub />} theme={theme} />
@@ -69,7 +70,7 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Centered Copyright */}
+      
       <div className="max-w-7xl mx-auto mt-12 pt-8 border-t border-dashed" style={{ borderColor: theme.border }}>
         <div style={{ color: theme.textSecondary }} className="text-center text-[10px] md:text-xs font-black uppercase tracking-[0.3em] opacity-50">
           © {new Date().getFullYear()} Rizwan Baloch • All Rights Reserved
