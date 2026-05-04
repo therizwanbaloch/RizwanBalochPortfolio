@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FiMenu, FiX, FiSun, FiMoon, FiDownload } from "react-icons/fi";
+import { FiMenu, FiX, FiSun, FiMoon, FiArrowUpRight } from "react-icons/fi";
 import useTheme from "../context/ThemeContext";
 
 const Navbar = () => {
@@ -11,7 +11,18 @@ const Navbar = () => {
   const handleScroll = (id) => {
     setIsOpen(false);
     const element = document.getElementById(id);
-    if (element) element.scrollIntoView({ behavior: "smooth" });
+    if (element) {
+      const offset = 80;
+      const bodyRect = document.body.getBoundingClientRect().top;
+      const elementRect = element.getBoundingClientRect().top;
+      const elementPosition = elementRect - bodyRect;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
   };
 
   const navLinks = [
@@ -25,69 +36,93 @@ const Navbar = () => {
   return (
     <nav
       style={{
-        backgroundColor: `${theme.background}E6`,
-        borderBottom: `1px solid ${theme.border}`,
+        backgroundColor: `${theme.background}E6`, // 90% opacity for better blur effect
+        borderBottom: `1px solid ${isDarkMode ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)"}`,
       }}
-      className="sticky top-0 z-50 w-full backdrop-blur-lg"
+      className="sticky top-0 z-[100] w-full backdrop-blur-xl transition-all duration-500"
     >
-      <div className="mx-auto max-w-7xl px-4">
-        <div className="flex h-16 items-center justify-between">
+      <div className="mx-auto max-w-[1450px] px-6 md:px-16 lg:px-32">
+        <div className="flex h-24 items-center justify-between">
+          
+          {/* Logo Section */}
           <button
             onClick={() => handleScroll("home")}
-            className="flex items-center gap-2 group cursor-pointer"
+            className="flex items-center gap-4 group cursor-pointer"
           >
             <div
               style={{ backgroundColor: theme.primary }}
-              className="flex h-9 w-9 items-center justify-center rounded-xl text-white font-bold shadow-md group-hover:rotate-12 transition"
+              className="flex h-11 w-11 items-center justify-center rounded-none text-white font-black text-xl transition-all duration-500 group-hover:rotate-[90deg]"
             >
               R
             </div>
-            <span
-              style={{ color: theme.textMain }}
-              className="hidden sm:block text-xl font-bold"
-            >
-              Rizwan <span style={{ color: theme.primary }}>Baloch</span>
-            </span>
+            <div className="flex flex-col leading-[0.8] text-left">
+              <span
+                style={{ color: theme.textMain }}
+                className="text-lg font-black uppercase tracking-tighter"
+              >
+                Rizwan
+              </span>
+              <span
+                className="text-[10px] font-bold uppercase tracking-[0.4em] opacity-40"
+                style={{ color: theme.textMain }}
+              >
+                Baloch
+              </span>
+            </div>
           </button>
 
-          <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <button
-                key={link.id}
-                onClick={() => handleScroll(link.id)}
-                style={{ color: theme.textSecondary }}
-                className="text-sm font-semibold transition hover:text-orange-500"
-              >
-                {link.label}
-              </button>
-            ))}
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-12">
+            <div className="flex items-center gap-10">
+              {navLinks.map((link) => (
+                <button
+                  key={link.id}
+                  onClick={() => handleScroll(link.id)}
+                  style={{ color: theme.textMain }}
+                  className="group relative py-2"
+                >
+                  <span className="text-[11px] font-bold uppercase tracking-[0.25em] opacity-50 group-hover:opacity-100 transition-all duration-300">
+                    {link.label}
+                  </span>
+                  {/* Status Dot Design instead of Numbers */}
+                  <span 
+                    className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300"
+                    style={{ 
+                      backgroundColor: theme.primary,
+                      boxShadow: isDarkMode ? `0 0 10px ${theme.primary}` : "none"
+                    }}
+                  />
+                </button>
+              ))}
+            </div>
 
-            <div className="flex items-center gap-4 border-l pl-6" style={{ borderColor: theme.border }}>
+            {/* Actions */}
+            <div className="flex items-center gap-8 border-l pl-10" style={{ borderColor: isDarkMode ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)" }}>
               <button
                 onClick={toggleTheme}
-                style={{ color: theme.textSecondary }}
-                className="rounded-full p-2 hover:bg-gray-500/10 transition"
+                style={{ color: theme.textMain }}
+                className="opacity-50 hover:opacity-100 hover:scale-110 transition-all"
               >
-                {isDarkMode ? <FiSun size={20} /> : <FiMoon size={20} />}
+                {isDarkMode ? <FiSun size={19} /> : <FiMoon size={19} />}
               </button>
 
               <a
                 href="/Resume.pdf"
-                download="Rizwan_Baloch_Resume.pdf"
-                className="flex items-center justify-center gap-3 font-bold rounded-full px-5 py-2 text-sm transition hover:bg-gray-500/5"
+                className="group flex items-center gap-3 font-bold text-[10px] uppercase tracking-[0.3em] px-8 py-4 transition-all overflow-hidden relative"
                 style={{ 
-                  border: `2px solid ${theme.border}`, 
-                  backgroundColor: theme.primary, 
-                  color: "white" 
+                  backgroundColor: theme.textMain, 
+                  color: theme.background 
                 }}
               >
-                <FiDownload /> Get Resume
+                <span className="relative z-10">Resume</span>
+                <FiArrowUpRight size={14} className="relative z-10 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
               </a>
             </div>
           </div>
 
-          <div className="flex items-center gap-4 md:hidden">
-            <button onClick={toggleTheme} style={{ color: theme.textSecondary }}>
+          {/* Mobile Toggle */}
+          <div className="flex items-center gap-6 md:hidden">
+            <button onClick={toggleTheme} style={{ color: theme.textMain }} className="opacity-60">
               {isDarkMode ? <FiSun size={22} /> : <FiMoon size={22} />}
             </button>
             <button onClick={toggleMenu} style={{ color: theme.textMain }}>
@@ -97,39 +132,48 @@ const Navbar = () => {
         </div>
       </div>
 
+      {/* Mobile Menu Overlay */}
       <div
-        className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-          isOpen ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"
+        className={`md:hidden fixed inset-0 top-24 z-[90] transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] ${
+          isOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
         }`}
-        style={{
-          backgroundColor: theme.background,
-          borderTop: `1px solid ${theme.border}`,
-        }}
+        style={{ backgroundColor: theme.background }}
       >
-        <div className="flex flex-col space-y-2 px-4 pb-8 pt-4">
-          {navLinks.map((link) => (
+        <div className="flex flex-col h-full px-10 pt-10">
+          {navLinks.map((link, idx) => (
             <button
               key={link.id}
               onClick={() => handleScroll(link.id)}
-              className="text-left py-3 text-lg font-medium"
-              style={{ color: theme.textMain, borderBottom: `1px solid ${theme.border}33` }}
+              className="group flex items-center justify-between py-8 border-b"
+              style={{ borderColor: isDarkMode ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)" }}
             >
-              {link.label}
+              <span 
+                style={{ color: theme.textMain }} 
+                className="text-4xl font-black uppercase tracking-tighter"
+              >
+                {link.label}
+              </span>
+              <div 
+                className="w-10 h-10 flex items-center justify-center rounded-full border"
+                style={{ borderColor: isDarkMode ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)" }}
+              >
+                <FiArrowUpRight size={20} style={{ color: theme.primary }} />
+              </div>
             </button>
           ))}
-
-          <a
-            href="Resume.pdf"
-            download="Rizwan_Baloch_Resume.pdf"
-            className="flex items-center justify-center gap-3 mt-4 w-full rounded-full py-4 text-center text-lg font-bold transition hover:bg-gray-500/5"
-            style={{ 
-              border: `2px solid ${theme.border}`, 
-              backgroundColor: theme.primary, 
-              color: "white" 
-            }}
-          >
-            <FiDownload /> Get Resume
-          </a>
+          
+          <div className="mt-auto pb-20">
+             <p className="text-[10px] font-bold uppercase tracking-[0.5em] mb-6 opacity-30" style={{ color: theme.textMain }}>
+               Available for worldwide projects
+             </p>
+             <a
+              href="Resume.pdf"
+              className="block w-full py-6 text-center text-xs font-black uppercase tracking-[0.4em]"
+              style={{ backgroundColor: theme.primary, color: "white" }}
+            >
+              Download CV
+            </a>
+          </div>
         </div>
       </div>
     </nav>

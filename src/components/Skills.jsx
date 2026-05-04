@@ -2,7 +2,8 @@ import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { 
   SiJavascript, SiReact, SiRedux, SiNodedotjs, 
-  SiMongodb, SiPostman, SiTailwindcss 
+  SiMongodb, SiPostman, SiTailwindcss, SiFirebase,
+  SiPostgresql, SiGooglecloud
 } from 'react-icons/si';
 import { TbDeviceMobileCode } from 'react-icons/tb';
 import useTheme from '../context/ThemeContext';
@@ -13,96 +14,118 @@ const Skills = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const skillSet = [
-    { name: "JavaScript", icon: <SiJavascript />, color: "#F7DF1E" },
-    { name: "React", icon: <SiReact />, color: "#61DAFB" },
-    { name: "Tailwind CSS", icon: <SiTailwindcss />, color: "#06B6D4" },
-    { name: "React Native", icon: <TbDeviceMobileCode />, color: "#61DAFB" },
-    { name: "Redux / Context", icon: <SiRedux />, color: "#764ABC" },
-    { name: "Node + Express", icon: <SiNodedotjs />, color: "#339933" },
-    { name: "MongoDB", icon: <SiMongodb />, color: "#47A248" },
-    { name: "API Testing", icon: <SiPostman />, color: "#FF6C37" },
+    { name: "JavaScript", icon: <SiJavascript />, color: "#F7DF1E", category: "Language" },
+    { name: "React Ecosystem", icon: <SiReact />, color: "#61DAFB", category: "Frontend" },
+    { name: "Tailwind UI", icon: <SiTailwindcss />, color: "#06B6D4", category: "Design" },
+    { name: "Mobile Architect", icon: <TbDeviceMobileCode />, color: "#61DAFB", category: "Mobile" },
+    { name: "State Management", icon: <SiRedux />, color: "#764ABC", category: "Frontend" },
+    { name: "Backend Systems", icon: <SiNodedotjs />, color: "#339933", category: "Backend" },
+    { name: "PostgreSQL", icon: <SiPostgresql />, color: "#336791", category: "Database" }, // Added
+    { name: "NoSQL Design", icon: <SiMongodb />, color: "#47A248", category: "Database" },
+    { name: "Cloud Deployment", icon: <SiGooglecloud />, color: "#4285F4", category: "DevOps" }, // Added
+    { name: "Firebase", icon: <SiFirebase />, color: "#FFCA28", category: "Cloud" },
   ];
 
-  const binaryParticles = Array.from({ length: 30 });
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 30 },
+    visible: (i) => ({
+      opacity: 1,
+      y: 0,
+      transition: { delay: i * 0.05, duration: 0.7, ease: [0.22, 1, 0.36, 1] }
+    }),
+  };
 
   return (
     <section 
       id="skills" 
       ref={ref}
-      style={{ backgroundColor: theme.background }}
-      className="relative py-24 px-6 md:px-16 lg:px-24 transition-colors duration-500 overflow-hidden"
+      style={{ 
+        backgroundColor: theme.background, 
+        borderColor: isDarkMode ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)",
+        transition: "background-color 0.5s ease"
+      }}
+      className="relative py-24 md:py-32 px-4 md:px-16 lg:px-32 overflow-hidden border-t"
     >
-      <div className="absolute inset-0 pointer-events-none opacity-25 z-0">
-        {binaryParticles.map((_, i) => (
+      <div className="max-w-[1450px] mx-auto z-10 relative">
+        
+        {/* Section Header */}
+        <div className="flex flex-col mb-16 md:mb-24 px-2">
           <motion.div
-            key={i}
-            className="absolute font-mono font-bold"
-            style={{ 
-              color: theme.primary,
-              left: Math.random() * 100 + '%',
-              fontSize: Math.random() * 12 + 10 + 'px',
-              filter: 'blur(0.5px)'
-            }}
-            animate={{
-              y: [-100, 1000],
-              opacity: [0, 0.8, 0.8, 0]
-            }}
-            transition={{
-              duration: Math.random() * 8 + 7,
-              repeat: Infinity,
-              ease: "linear",
-              delay: Math.random() * -20
-            }}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+            variants={fadeInUp}
+            custom={0}
           >
-            {Math.round(Math.random())}
+            <span 
+              className="px-3 py-1.5 font-bold tracking-[0.3em] uppercase border-l-2 mb-6 inline-block text-[10px] md:text-[11px]"
+              style={{ 
+                color: theme.primary, 
+                borderColor: theme.primary,
+                backgroundColor: isDarkMode ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.03)" 
+              }}
+            >
+              Core Competencies
+            </span>
+            <h2 
+              style={{ color: theme.textMain }} 
+              className="text-5xl md:text-8xl lg:text-9xl font-black tracking-tighter uppercase leading-[0.8]"
+            >
+              TECH <br />
+              <span className="opacity-10 italic">EXPERTISE.</span>
+            </h2>
           </motion.div>
-        ))}
-      </div>
+        </div>
 
-      <div className="max-w-7xl mx-auto z-10 relative">
-        <motion.div 
-          className="mb-16 text-center md:text-left"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-        >
-          <h2 style={{ color: theme.textMain }} className="text-4xl md:text-6xl font-black mb-4 tracking-tighter uppercase italic">
-            Technical <span style={{ color: theme.primary }}>Arsenal.</span>
-          </h2>
-          <div className="h-1.5 w-24 rounded-full mx-auto md:mx-0" style={{ backgroundColor: theme.primary }}></div>
-        </motion.div>
-
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-8">
+        {/* Skills Grid: Forced 2 columns on mobile (grid-cols-2) */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-x-4 gap-y-12 md:gap-x-8 md:gap-y-20">
           {skillSet.map((skill, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ delay: idx * 0.05 }}
-              whileHover={{ 
-                y: -10,
-                rotateY: 10,
-                boxShadow: `0 25px 50px -12px ${skill.color}40`
-              }}
-              style={{ 
-                backgroundColor: theme.surface + 'cc', 
-                border: `1px solid ${theme.border}`,
-                backdropFilter: 'blur(10px)',
-                perspective: "1000px"
-              }}
-              className="group p-10 rounded-[2.5rem] flex flex-col items-center justify-center gap-6 transition-all duration-500 cursor-default"
+              initial="hidden"
+              animate={isInView ? "visible" : "hidden"}
+              variants={fadeInUp}
+              custom={idx + 1}
+              className="group flex flex-col items-start px-2"
             >
               <div 
-                className="text-6xl transition-all duration-500 group-hover:scale-110 group-hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]"
-                style={{ color: isDarkMode ? skill.color : theme.textMain }}
+                className="text-4xl md:text-6xl mb-6 md:mb-8 transition-all duration-500 group-hover:-translate-y-2 group-hover:scale-110"
+                style={{ 
+                  color: skill.color,
+                  filter: isDarkMode 
+                    ? `drop-shadow(0 0 15px ${skill.color}30)` 
+                    : `drop-shadow(0 0 8px ${skill.color}15)` 
+                }}
               >
                 {skill.icon}
               </div>
-              <span 
-                style={{ color: theme.textMain }} 
-                className="text-xs font-black uppercase tracking-[0.2em] text-center opacity-80 group-hover:opacity-100"
-              >
-                {skill.name}
-              </span>
+
+              <div className="flex flex-col gap-1 w-full">
+                <span 
+                  className="text-[8px] md:text-[10px] font-bold uppercase tracking-[0.2em]"
+                  style={{ color: isDarkMode ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.5)" }}
+                >
+                  {skill.category}
+                </span>
+                <h3 
+                  style={{ color: theme.textMain }} 
+                  className="text-lg md:text-2xl font-black tracking-tighter uppercase truncate w-full"
+                >
+                  {skill.name}
+                </h3>
+                
+                <div 
+                  className="h-[1px] w-full mt-3 md:mt-4" 
+                  style={{ backgroundColor: isDarkMode ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)" }}
+                >
+                  <motion.div 
+                    initial={{ width: 0 }}
+                    animate={isInView ? { width: "40px" } : {}}
+                    transition={{ delay: 0.5 + (idx * 0.05), duration: 1, ease: "circOut" }}
+                    className="h-full"
+                    style={{ backgroundColor: theme.primary }}
+                  />
+                </div>
+              </div>
             </motion.div>
           ))}
         </div>

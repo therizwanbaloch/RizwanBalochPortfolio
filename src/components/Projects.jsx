@@ -1,11 +1,6 @@
 import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import {
-  FiExternalLink,
-  FiLayers,
-  FiMessageSquare,
-  FiCpu,
-} from "react-icons/fi";
+import { FiArrowUpRight } from "react-icons/fi";
 import useTheme from "../context/ThemeContext";
 
 const Projects = () => {
@@ -15,243 +10,177 @@ const Projects = () => {
 
   const projectsData = [
     {
+      title: "Xevron",
+      description: "A subscription-based design agency platform featuring high-conversion Webflow architecture and a scalable service-as-a-product business model.",
+      link: "xevron-kappa.vercel.app", 
+      tech: ["Webflow", "UI/UX", "Brand Strategy", "Design Systems"],
+      type: "Productized Service",
+      num: "01"
+    },
+    {
       title: "PKRSPOT",
-      description:
-        "A crypto-to-PKR exchange platform with real-time rate tracking and secure transaction flows.",
+      description: "A high-performance crypto-to-PKR exchange engine featuring real-time liquidity tracking and automated secure transaction flows.",
       link: "https://pkrspot.vercel.app",
-      tech: ["React", "Node.js", "RestAPI"],
-      type: "Finance App",
+      tech: ["React", "Node.js", "Firebase", "RestAPI"],
+      type: "FinTech Platform",
+      num: "02"
     },
     {
       title: "Balochistan Bazaar",
-      description:
-        "Full-scale E-commerce solution focused on regional trade with modern UI and smooth checkout.",
+      description: "Scalable E-commerce architecture optimized for regional trade logistics, featuring a high-conversion UI and custom checkout logic.",
       link: "https://balochistanbazaar.vercel.app",
       tech: ["MERN Stack", "Redux", "Tailwind"],
       type: "E-Commerce",
+      num: "03"
     },
     {
       title: "Vaultflow",
-      description:
-        "A modern real-time analytics platform empowering businesses with actionable data insights, customizable dashboards, digital credit tokens, and seamless code collaboration for smarter decision-making.",
-      link: "https://vaultflow-nine.vercel.app/",
-      tech: ["React", "Analytics", "Real-Time Data", "Dashboard UI"],
-      type: "Analytics Platform",
+      description: "Enterprise analytics dashboard providing real-time data visualization, digital credit tokenization, and multi-tenant code collaboration.",
+      link: "vaultflow-nine.vercel.app",
+      tech: ["React", "Analytics", "Data Vis", "Dashboard"],
+      type: "B2B SaaS",
+      num: "04"
     },
     {
-      title: "Mell Family Tap Tap Game",
-      description:
-        "A Telegram Mini App Tap Tap game built with React and FastAPI backend, featuring 27 interactive pages. The game includes real-time scoring, smooth animations, and engaging tap-based mechanics designed for high user retention inside Telegram mini apps.",
+      title: "Mell Family Game",
+      description: "Telegram Mini App with a FastAPI backend. Engineered for high user retention with real-time state management across 27 interactive pages.",
       link: "https://mell-family-frontend.vercel.app",
-      tech: ["React", "FastAPI", "Telegram Mini App", "Game UI", "REST API"],
-      type: "Game / Telegram Mini App",
-    },
-    {
-      title: "Xevron",
-      description:
-        "A leading digital agency offering subscription-based design services, including Web Design, UI/UX, branding, and digital assets. Xevron helps startups and enterprises scale with high-quality, on-demand design powered by senior designers and fast turnaround workflows.",
-      link: "https://xevron-kappa.vercel.app/",
-      tech: ["Web Design", "UI/UX", "Webflow", "Branding", "Design System"],
-      type: "Digital Agency",
+      tech: ["FastAPI", "React", "Telegram API", "Game Engine"],
+      type: "Social Web3",
+      num: "05"
     },
   ];
 
-  const particles = Array.from({ length: 35 });
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 40 },
+    visible: (i) => ({
+      opacity: 1,
+      y: 0,
+      transition: { delay: i * 0.1, duration: 0.8, ease: [0.22, 1, 0.36, 1] }
+    }),
+  };
 
   return (
     <section
       id="projects"
       ref={ref}
-      style={{ backgroundColor: theme.background }}
-      className="relative py-24 px-6 md:px-16 lg:px-24 transition-colors duration-500 overflow-hidden"
+      style={{ 
+        backgroundColor: theme.background,
+        borderColor: isDarkMode ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)",
+        transition: "background-color 0.5s ease" 
+      }}
+      className="relative py-32 px-6 md:px-16 lg:px-32 overflow-hidden border-t"
     >
-      <div className="absolute inset-0 pointer-events-none z-0">
-        {particles.map((_, i) => {
-          const size = Math.random() * 7 + 3;
-          const duration = Math.random() * 12 + 8;
-          const delay = Math.random() * 10;
+      {/* Centered Structural Line */}
+      <div 
+        className="absolute left-1/2 top-0 w-[1px] h-full hidden lg:block opacity-20" 
+        style={{ backgroundColor: isDarkMode ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)" }} 
+      />
 
-          return (
-            <motion.div
-              key={i}
-              className="absolute rounded-full"
-              style={{
-                backgroundColor: theme.primary,
-                width: size,
-                height: size,
-                left: Math.random() * 100 + "%",
-                filter: `blur(${size / 2.5}px)`,
-                boxShadow: `0 0 ${size * 3}px ${theme.primary}80`,
-              }}
-              initial={{ y: -100, opacity: 0 }}
-              animate={{
-                y: [0, 1200],
-                opacity: [0, 0.7, 0.7, 0],
-                x: [0, Math.random() * 60 - 30, 0],
-              }}
-              transition={{
-                duration: duration,
-                repeat: Infinity,
-                delay: -delay,
-                ease: "linear",
-              }}
-            />
-          );
-        })}
-      </div>
-
-      <div className="max-w-7xl mx-auto z-10 relative">
-        <motion.div
-          className="mb-12 text-center md:text-left"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-        >
-          <h2
-            style={{ color: theme.textMain }}
-            className="text-4xl md:text-6xl font-black mb-4 tracking-tighter italic uppercase"
+      <div className="max-w-[1450px] mx-auto z-10 relative">
+        
+        {/* Header Section */}
+        <div className="flex flex-col mb-24">
+          <motion.div
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+            variants={fadeInUp}
+            custom={0}
           >
-            Featured <span style={{ color: theme.primary }}>Work.</span>
-          </h2>
-          <div
-            className="h-1.5 w-24 rounded-full mx-auto md:mx-0"
-            style={{ backgroundColor: theme.primary }}
-          ></div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.1 }}
-          className="mb-10 p-8 md:p-12 rounded-[3rem] border-2 border-dashed relative overflow-hidden group"
-          style={{
-            borderColor: theme.border,
-            backgroundColor: theme.surface + "90",
-            backdropFilter: "blur(12px)",
-          }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-indigo-500/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1500"></div>
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            <div className="flex items-center gap-6">
-              <div
-                style={{
-                  backgroundColor: theme.primary + "20",
-                  color: theme.primary,
-                }}
-                className="p-4 rounded-2xl text-3xl"
-              >
-                <FiCpu />
-              </div>
-              <div className="text-center md:text-left">
-                <p
-                  style={{ color: theme.primary }}
-                  className="font-bold uppercase text-[10px] tracking-[0.4em] mb-1"
-                >
-                  Active Environment
-                </p>
-                <h4
-                  style={{ color: theme.textMain }}
-                  className="text-2xl md:text-3xl font-black italic"
-                >
-                  Rizwan Baloch Portfolio
-                </h4>
-              </div>
-            </div>
-            <a
-              href="https://rizwanbalochportfolio.netlify.app"
-              target="_blank"
-              rel="noreferrer"
-              style={{
-                backgroundColor: theme.primary,
-                color: "#fff",
-                zIndex: 20,
+            <span 
+              className="px-4 py-1.5 text-[11px] font-bold tracking-[0.5em] uppercase border-l-2 mb-6 inline-block"
+              style={{ 
+                color: theme.primary, 
+                borderColor: theme.primary, 
+                backgroundColor: isDarkMode ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.03)" 
               }}
-              className="px-8 py-4 rounded-2xl font-bold flex items-center gap-3 hover:scale-105 transition-transform shadow-lg relative"
             >
-              Current Link <FiExternalLink />
-            </a>
-          </div>
-        </motion.div>
+              Selected Portfolio
+            </span>
+            <h2 style={{ color: theme.textMain }} className="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter uppercase leading-[0.85]">
+              FEATURED <br />
+              <span className="opacity-10 italic">SYSTEMS.</span>
+            </h2>
+          </motion.div>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 lg:gap-12">
+        {/* Improved Project Grid */}
+        <div 
+          className="grid grid-cols-1 md:grid-cols-2 border-t border-l"
+          style={{ borderColor: isDarkMode ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)" }}
+        >
           {projectsData.map((project, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: idx * 0.1 + 0.2, duration: 0.6 }}
-              whileHover={{ y: -12 }}
-              style={{
-                backgroundColor: theme.surface + "cc",
-                backdropFilter: "blur(10px)",
-                border: `1px solid ${theme.border}`,
-                boxShadow: isDarkMode
-                  ? "0 25px 50px -12px rgba(0,0,0,0.5)"
-                  : "0 25px 50px -12px rgba(0,0,0,0.08)",
+              initial="hidden"
+              animate={isInView ? "visible" : "hidden"}
+              variants={fadeInUp}
+              custom={idx + 1}
+              className="group relative p-10 md:p-16 border-r border-b overflow-hidden transition-all duration-700"
+              style={{ 
+                borderColor: isDarkMode ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)",
+                backgroundColor: "transparent"
               }}
-              className="group rounded-[3rem] p-8 md:p-12 transition-all duration-500 flex flex-col justify-between relative overflow-hidden"
             >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500 opacity-0 group-hover:opacity-10 blur-3xl transition-opacity"></div>
-              <div>
-                <div className="flex justify-between items-start mb-8">
-                  <div
-                    style={{
-                      backgroundColor: theme.primary + "15",
-                      color: theme.primary,
-                    }}
-                    className="p-5 rounded-[1.5rem] text-3xl shadow-inner"
+              {/* Dynamic Hover Glow */}
+              <div 
+                className="absolute inset-0 opacity-0 group-hover:opacity-[0.03] transition-opacity duration-700 pointer-events-none" 
+                style={{ backgroundColor: theme.primary }} 
+              />
+              
+              <div className="relative z-10">
+                <div className="flex justify-between items-start mb-16">
+                  <span 
+                    className="text-5xl font-black leading-none select-none" 
+                    style={{ color: isDarkMode ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.06)" }}
                   >
-                    {project.specialIcon || <FiLayers />}
-                  </div>
+                    {project.num}
+                  </span>
                   <a
                     href={project.link}
                     target="_blank"
                     rel="noreferrer"
-                    style={{
-                      color: theme.textMain,
-                      backgroundColor: theme.border + "30",
-                      zIndex: 20,
+                    className="p-5 border transition-all duration-500 hover:rotate-12 group-hover:scale-110"
+                    style={{ 
+                        color: theme.primary, 
+                        borderColor: isDarkMode ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.12)",
+                        backgroundColor: isDarkMode ? "rgba(255,255,255,0.02)" : "rgba(0,0,0,0.02)"
                     }}
-                    className="hover:scale-110 transition-transform p-3 rounded-full border border-transparent hover:border-indigo-500 relative"
                   >
-                    <FiExternalLink size={22} />
+                    <FiArrowUpRight size={22} />
                   </a>
                 </div>
-                <p
-                  style={{ color: theme.primary }}
-                  className="text-[10px] font-black uppercase tracking-[0.3em] mb-3"
+
+                <div className="mb-14">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.5em] mb-5" style={{ color: theme.primary }}>
+                    {project.type}
+                  </p>
+                  <h3 style={{ color: theme.textMain }} className="text-4xl md:text-5xl font-black uppercase tracking-tighter leading-none mb-6 group-hover:italic transition-all duration-500">
+                    {project.title}
+                  </h3>
+                  <p style={{ color: theme.textSecondary }} className="text-base leading-relaxed font-medium max-w-md opacity-80">
+                    {project.description}
+                  </p>
+                </div>
+
+                {/* Tech Stack - Elevated UI */}
+                <div 
+                  className="flex flex-wrap gap-x-5 gap-y-3 mt-12 pt-8 border-t"
+                  style={{ borderColor: isDarkMode ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)" }}
                 >
-                  {project.type}
-                </p>
-                <h3
-                  style={{ color: theme.textMain }}
-                  className="text-3xl font-black mb-5 tracking-tight group-hover:text-indigo-400 transition-colors"
-                >
-                  {project.title}
-                </h3>
-                <p
-                  style={{ color: theme.textSecondary }}
-                  className="text-lg leading-relaxed mb-8 opacity-90 font-medium"
-                >
-                  {project.description}
-                </p>
-              </div>
-              <div
-                className="flex flex-wrap gap-2 mt-auto pt-8 border-t"
-                style={{ borderColor: theme.border }}
-              >
-                {project.tech.map((t) => (
-                  <span
-                    key={t}
-                    className="text-[11px] font-bold px-4 py-1.5 rounded-full border"
-                    style={{
-                      borderColor: theme.border,
-                      color: theme.textSecondary,
-                      backgroundColor: theme.background,
-                    }}
-                  >
-                    {t}
-                  </span>
-                ))}
+                  {project.tech.map((t) => (
+                    <span
+                      key={t}
+                      className="text-[9px] font-bold uppercase tracking-[0.2em] px-3 py-1 border"
+                      style={{ 
+                        color: isDarkMode ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.5)",
+                        borderColor: isDarkMode ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)"
+                      }}
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
               </div>
             </motion.div>
           ))}

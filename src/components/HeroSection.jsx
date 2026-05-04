@@ -1,218 +1,180 @@
-import React, { useRef } from "react";
+import React, { useRef, useMemo } from "react";
 import { motion, useInView } from "framer-motion";
-import { FiDownload, FiArrowRight } from "react-icons/fi"; // Added Arrow icon
-import { FaReact, FaNodeJs, FaHtml5, FaJs } from "react-icons/fa";
-import { SiMongodb, SiExpress, SiPostman } from "react-icons/si";
-import profilePic from "../assets/Profile.jpeg";
+import { FiArrowRight, FiDownload } from "react-icons/fi";
+import { FaReact, FaNodeJs, FaJs } from "react-icons/fa";
+import { SiMongodb, SiFirebase, SiFramer, SiRedux } from "react-icons/si";
+import { TbDeviceMobileCode } from "react-icons/tb";
+import profilePic from "../assets/Profile.png"; 
 import useTheme from "../context/ThemeContext";
-
-const Snow = () => (
-  <div className="pointer-events-none absolute inset-0 overflow-hidden z-0">
-    {[...Array(40)].map((_, i) => (
-      <span
-        key={i}
-        className="absolute top-[-10px] w-1 h-1 rounded-full bg-white/20 animate-snow"
-        style={{
-          left: `${Math.random() * 100}%`,
-          animationDelay: `${Math.random() * 10}s`,
-          animationDuration: `${10 + Math.random() * 15}s`,
-          filter: "blur(1px)",
-        }}
-      />
-    ))}
-  </div>
-);
 
 const HeroSection = () => {
   const { theme, isDarkMode } = useTheme();
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
+  const colors = useMemo(() => ({
+    bg: isDarkMode ? "#020617" : "#f8fafc",
+    textMain: isDarkMode ? "#ffffff" : "#0f172a",
+    textSecondary: isDarkMode ? "#94a3b8" : "#475569",
+    border: isDarkMode ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)",
+    accent: theme.primary || "#6366f1",
+    badgeBg: isDarkMode ? "rgba(99, 102, 241, 0.1)" : "rgba(99, 102, 241, 0.05)",
+  }), [isDarkMode, theme.primary]);
+
   const techStack = [
-    { icon: <FaReact />, color: "#61DBFB", distance: 130, delay: 0 },
-    { icon: <FaNodeJs />, color: "#68A063", distance: 110, delay: 0.5 },
-    { icon: <SiMongodb />, color: "#47A248", distance: 150, delay: 1 },
-    { icon: <FaHtml5 />, color: "#E34F26", distance: 120, delay: 1.5 },
-    { icon: <SiExpress />, color: isDarkMode ? "#fff" : "#000", distance: 100, delay: 2 },
-    { icon: <FaJs />, color: "#F7DF1E", distance: 160, delay: 2.5 },
-    { icon: <SiPostman />, color: "#FF6C37", distance: 140, delay: 3 },
+    { icon: <FaJs />, color: "#F7DF1E", x: -80, y: -250 },
+    { icon: <FaReact />, color: "#61DBFB", x: 100, y: -200 },
+    { icon: <SiFirebase />, color: "#FFCA28", x: 180, y: -80 },
+    { icon: <TbDeviceMobileCode />, color: colors.accent, x: 190, y: 80 },
+    { icon: <SiRedux />, color: "#764ABC", x: 120, y: 220 },
+    { icon: <FaNodeJs />, color: "#68A063", x: -20, y: 280 },
+    { icon: <SiMongodb />, color: "#47A248", x: -160, y: 180 },
+    { icon: <SiFramer />, color: colors.textMain, x: -190, y: 20 },
   ];
 
-  // Animation Variants for cleaner code
-  const fadeInUp = {
-    hidden: { opacity: 0, y: 30 },
-    visible: (i) => ({
-      opacity: 1,
-      y: 0,
-      transition: { delay: i * 0.1, duration: 0.6, ease: "easeOut" }
-    }),
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { staggerChildren: 0.15 } },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 25 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } },
   };
 
   return (
     <section
       id="home"
       ref={ref}
-      style={{ backgroundColor: theme.background }}
-      className="relative min-h-[90vh] flex flex-col md:flex-row items-center justify-between px-6 md:px-16 lg:px-32 py-20 overflow-hidden transition-colors duration-500"
+      style={{ backgroundColor: colors.bg, transition: "background-color 0.5s ease" }}
+      className="relative min-h-screen flex items-center justify-center px-6 md:px-16 lg:px-24 pt-24 pb-20 overflow-hidden"
     >
-      <Snow />
-
-      {/* Left Content */}
-      <div className="flex flex-col items-center md:items-start text-center md:text-left gap-6 md:max-w-2xl z-10">
-        <motion.div
-          custom={0}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          variants={fadeInUp}
-          className="px-4 py-1.5 rounded-full text-sm font-medium tracking-wide uppercase"
-          style={{
-            backgroundColor: isDarkMode ? "rgba(99,102,241,0.1)" : "rgba(99,102,241,0.05)",
-            color: theme.primary,
-            border: `1px solid ${isDarkMode ? "rgba(99,102,241,0.3)" : "rgba(99,102,241,0.2)"}`,
-          }}
-        >
-          Full-Stack Web & Mobile Developer
-        </motion.div>
-
-        <motion.h1
-          custom={1}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          variants={fadeInUp}
-          style={{ color: theme.textMain }}
-          className="text-5xl sm:text-6xl lg:text-8xl font-extrabold tracking-tight"
-        >
-          Rizwan <span style={{ color: theme.primary }}>Baloch</span>
-        </motion.h1>
-
-        <motion.p
-          custom={2}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          variants={fadeInUp}
-          style={{ color: theme.textSecondary }}
-          className="text-lg md:text-xl leading-relaxed max-w-lg"
-        >
-          I build <span className="font-semibold" style={{ color: theme.textMain }}>modern, scalable MERN applications</span> and robust React ecosystems. 
-          I also craft <span className="text-green-500 font-bold">React Native</span> mobile apps 
-          with high-performance UX.
-        </motion.p>
-
-        {/* Desktop Buttons */}
-        <motion.div 
-          custom={3}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          variants={fadeInUp}
-          className="hidden md:flex gap-5 mt-4"
-        >
-          <a
-            href="#projects"
-            style={{ backgroundColor: theme.primary }}
-            className="group px-8 py-3.5 rounded-xl text-white font-bold shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40 hover:-translate-y-1 transition-all duration-300 flex items-center gap-2"
-          >
-            Explore Projects <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
-          </a>
-          <a
-            href="/Resume.pdf"
-            download
-            style={{ color: theme.textMain, border: `1px solid ${theme.border}` }}
-            className="px-8 py-3.5 rounded-xl font-bold hover:bg-white/5 backdrop-blur-sm transition-all duration-300 flex items-center gap-2"
-          >
-            <FiDownload /> Resume
-          </a>
-        </motion.div>
-      </div>
-
-      {/* Right Content - Visual Profile */}
-      <div className="relative mt-16 md:mt-0 flex items-center justify-center w-72 h-72 md:w-[450px] md:h-[450px] z-10">
-        {/* Animated Glow Background */}
-        <div
-          className="absolute inset-0 rounded-full blur-[80px] opacity-20 animate-pulse"
-          style={{ backgroundColor: theme.primary }}
-        />
-        
-        {/* Profile Image Container */}
-        <div
-          className="relative z-20 w-64 h-64 md:w-80 md:h-80 rounded-[2.5rem] overflow-hidden border-4 shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500"
-          style={{ borderColor: theme.primary }}
-        >
-          <img
-            src={profilePic}
-            alt="Rizwan"
-            className="w-full h-full object-cover scale-110 hover:scale-100 transition-transform duration-700"
-          />
-        </div>
-
-        {/* Tech Stack Orbit */}
-        {techStack.map((tech, i) => (
-          <motion.div
-            key={i}
-            className="absolute inset-0 flex items-center justify-center pointer-events-none"
-            animate={{ rotate: 360 }}
-            transition={{
-              duration: 30 + i * 5,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-          >
-            <motion.div
-              className="absolute p-3 rounded-xl backdrop-blur-md bg-white/10 border border-white/20 shadow-lg"
-              animate={{ rotate: -360 }} // Counter-rotation keeps icons upright
-              transition={{
-                duration: 30 + i * 5,
-                repeat: Infinity,
-                ease: "linear",
-              }}
-              style={{
-                color: tech.color,
-                transform: `translate(${tech.distance}px, -${tech.distance}px)`,
-              }}
-            >
-              <span className="text-2xl md:text-3xl">{tech.icon}</span>
-            </motion.div>
-          </motion.div>
-        ))}
-      </div>
-
-      {/* Mobile Buttons */}
-      <motion.div
-        custom={4}
+      <motion.div 
+        className="w-full max-w-[1400px] grid grid-cols-1 lg:grid-cols-[60%_40%] gap-12 items-center z-10"
         initial="hidden"
         animate={inView ? "visible" : "hidden"}
-        variants={fadeInUp}
-        className="flex md:hidden flex-col gap-4 mt-12 items-center w-full"
+        variants={containerVariants}
       >
-        <a
-          href="#projects"
-          style={{ backgroundColor: theme.primary }}
-          className="w-full text-center py-4 rounded-xl text-white font-bold shadow-xl active:scale-95 transition"
-        >
-          Explore Projects
-        </a>
-        <a
-          href="/Resume.pdf"
-          download
-          style={{ color: theme.textMain, border: `1px solid ${theme.border}` }}
-          className="w-full text-center py-4 rounded-xl font-bold flex items-center justify-center gap-2 active:scale-95 transition"
-        >
-          <FiDownload /> Resume
-        </a>
+        {/* TEXT CONTENT */}
+        <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
+          <motion.div
+            variants={itemVariants}
+            className="px-4 py-2 font-bold tracking-[0.2em] uppercase border-l-4 mb-8 text-[12px]"
+            style={{
+              backgroundColor: colors.badgeBg,
+              color: colors.accent,
+              borderColor: colors.accent,
+            }}
+          >
+            Full-Stack Web & Mobile Architect
+          </motion.div>
+
+          <motion.h1
+            variants={itemVariants}
+            style={{ color: colors.textMain }}
+            className="text-6xl md:text-8xl lg:text-[10rem] font-extrabold tracking-tighter leading-[0.85] mb-10"
+          >
+            RIZWAN <br />
+            <span className="opacity-10 italic">BALOCH</span>
+          </motion.h1>
+
+          <motion.p
+            variants={itemVariants}
+            style={{ color: colors.textSecondary, borderColor: colors.border }}
+            className="text-lg md:text-2xl font-light leading-relaxed max-w-2xl border-l-2 pl-6 mb-12"
+          >
+            Engineering <span style={{ color: colors.textMain }} className="font-semibold">scalable MERN ecosystems</span>. 
+            I specialize in high-performance architectures and premium <span style={{ color: colors.accent }} className="font-bold">React Native</span> solutions.
+          </motion.p>
+
+          <motion.div variants={itemVariants} className="flex flex-wrap justify-center lg:justify-start gap-4">
+            <a
+              href="#projects"
+              style={{ backgroundColor: colors.accent }}
+              className="px-8 py-4 text-white font-bold text-xs tracking-widest uppercase hover:brightness-110 transition-all flex items-center gap-3 shadow-lg shadow-indigo-500/20"
+            >
+              EXPLORE SYSTEMS <FiArrowRight size={18} />
+            </a>
+            <a
+              href="/Resume.pdf"
+              download
+              style={{ color: colors.textMain, borderColor: colors.border }}
+              className="px-8 py-4 border font-bold text-xs tracking-widest uppercase hover:bg-black/5 dark:hover:bg-white/5 transition-all flex items-center gap-3"
+            >
+              GET RESUME <FiDownload size={18} />
+            </a>
+          </motion.div>
+        </div>
+
+        {/* IMAGE SECTION */}
+        <div className="relative flex justify-center lg:justify-end items-center">
+          {/* Ambient Glow */}
+          <div 
+            className="absolute w-[450px] h-[450px] rounded-full blur-[120px] opacity-20 pointer-events-none"
+            style={{ backgroundColor: colors.accent }}
+          />
+
+          {/* Floating Tech Stack */}
+          {techStack.map((tech, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, scale: 0 }}
+              animate={inView ? { opacity: 0.6, scale: 1 } : {}}
+              transition={{ delay: 0.8 + i * 0.1 }}
+              className="absolute z-10 hidden lg:block"
+              style={{
+                color: tech.color,
+                left: `calc(50% + ${tech.x}px)`,
+                top: `calc(50% + ${tech.y}px)`,
+              }}
+            >
+              <motion.span 
+                className="text-4xl block"
+                animate={{ y: [0, -15, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: i * 0.5 }}
+              >
+                {tech.icon}
+              </motion.span>
+            </motion.div>
+          ))}
+
+          {/* Profile Picture Container */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, x: 20 }}
+            animate={inView ? { opacity: 1, scale: 1, x: 0 } : {}}
+            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+            className="relative z-20 w-full max-w-[420px] group"
+          >
+            {/* Animated Decorative Frames */}
+            <div 
+              className="absolute -inset-4 border border-dashed opacity-20 group-hover:opacity-40 group-hover:rotate-3 transition-all duration-700 pointer-events-none"
+              style={{ borderColor: colors.accent }}
+            />
+            <div 
+              className="absolute -inset-2 border border-solid opacity-10 group-hover:opacity-30 group-hover:-rotate-3 transition-all duration-1000 pointer-events-none"
+              style={{ borderColor: colors.textMain }}
+            />
+
+            {/* Image Wrapper */}
+            <div className="relative overflow-hidden bg-slate-900/5 dark:bg-white/5 backdrop-blur-sm border border-white/10 shadow-2xl">
+              <img
+                src={profilePic}
+                alt="Rizwan Baloch"
+                className="w-full h-full object-contain filter grayscale group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-[1.03]"
+              />
+              
+              {/* Corner Accents */}
+              <div className="absolute top-0 left-0 w-10 h-10 border-t-2 border-l-2" style={{ borderColor: colors.accent }} />
+              <div className="absolute bottom-0 right-0 w-10 h-10 border-b-2 border-r-2" style={{ borderColor: colors.accent }} />
+            </div>
+  
+  
+          </motion.div>
+        </div>
       </motion.div>
 
-      <style>
-        {`
-          @keyframes snow {
-            0% { transform: translateY(-10vh) translateX(0); }
-            100% { transform: translateY(110vh) translateX(20px); }
-          }
-          .animate-snow {
-            animation-name: snow;
-            animation-timing-function: linear;
-            animation-iteration-count: infinite;
-          }
-        `}
-      </style>
+
+      <div className="absolute bottom-0 left-0 w-full h-[1px] opacity-10" style={{ backgroundColor: colors.textMain }} />
     </section>
   );
 };

@@ -29,190 +29,162 @@ const ContactForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     emailjs
       .send("service_pj42j4j", "template_tdis61b", form, "PKpVN9FZYcF6v5ZfU")
       .then(
         () => {
-          showToast("success", "Message sent successfully!");
+          showToast("success", "INQUIRY RECEIVED SUCCESSFULLY.");
           setForm({ name: "", email: "", phone: "", service: "", message: "" });
         },
         (error) => {
           console.error(error.text);
-          showToast("error", "Failed to send message. Please try again.");
+          showToast("error", "SYSTEM ERROR. PLEASE RETRY.");
         }
       );
   };
 
-  const particles = Array.from({ length: 30 });
+  const adaptiveBorder = isDarkMode ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)";
 
   return (
     <section
       id="contact"
       style={{ backgroundColor: theme.background }}
-      className="relative flex items-center justify-center min-h-screen py-16 px-6 overflow-hidden transition-colors duration-500"
+      className="relative min-h-screen py-32 px-6 md:px-16 lg:px-32 flex flex-col items-center justify-center overflow-hidden transition-colors duration-500 border-t"
+      style={{ borderColor: adaptiveBorder, backgroundColor: theme.background }}
     >
-      
+      {/* Technical Background Grid */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
+           style={{ backgroundImage: `linear-gradient(${adaptiveBorder} 1px, transparent 1px), linear-gradient(90deg, ${adaptiveBorder} 1px, transparent 1px)`, backgroundSize: '50px 50px' }} />
 
-      <div className="absolute inset-0 pointer-events-none z-0">
-        {particles.map((_, i) => {
-          const size = Math.random() * 6 + 4;
-          return (
-            <motion.div
-              key={i}
-              className="absolute rounded-full"
-              style={{
-                backgroundColor: theme.primary,
-                width: size,
-                height: size,
-                left: Math.random() * 100 + "%",
-                filter: `blur(${size / 3}px)`,
-                boxShadow: `0 0 ${size * 2}px ${theme.primary}40`,
-              }}
-              animate={{
-                y: [-20, 1000],
-                opacity: [0, 0.5, 0.5, 0],
-                x: [0, Math.random() * 50 - 25, 0],
-              }}
-              transition={{
-                duration: Math.random() * 10 + 10,
-                repeat: Infinity,
-                ease: "linear",
-                delay: Math.random() * -20,
-              }}
-            />
-          );
-        })}
-      </div>
-
-
-
-      <motion.div
-        ref={formRef}
-        initial={{ opacity: 0, y: 50 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.8 }}
-        style={{
-          backgroundColor: theme.surface + "cc",
-          backdropFilter: "blur(12px)",
-          border: `1px solid ${theme.border}`,
-          boxShadow: isDarkMode
-            ? "0 25px 50px -12px rgba(0,0,0,0.5)"
-            : "0 20px 40px rgba(0,0,0,0.05)",
-        }}
-        className="relative z-10 p-8 md:p-12 rounded-[2.5rem] max-w-2xl w-full"
-      >
-        <div className="text-center mb-10">
-          <h2
-            style={{ color: theme.textMain }}
-            className="text-4xl md:text-5xl font-black italic uppercase tracking-tighter"
+      <div className="max-w-[1450px] w-full mx-auto relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32 items-start">
+          
+          {/* Left Column: Info */}
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8 }}
           >
-            Get <span style={{ color: theme.primary }}>In Touch.</span>
-          </h2>
-          <div
-            className="h-1.5 w-16 rounded-full mx-auto mt-4"
-            style={{ backgroundColor: theme.primary }}
-          ></div>
-        </div>
+            <span 
+              className="px-4 py-1.5 text-[10px] font-black tracking-[0.4em] uppercase border-l-2 mb-6 inline-block"
+              style={{ color: theme.primary, borderColor: theme.primary }}
+            >
+              Contact Protocol
+            </span>
+            <h2 style={{ color: theme.textMain }} className="text-6xl md:text-8xl font-black tracking-tighter uppercase leading-[0.8] mb-12">
+              START A <br />
+              <span className="opacity-10 italic">PROJECT.</span>
+            </h2>
+            <p style={{ color: theme.textSecondary }} className="text-lg max-w-sm leading-relaxed opacity-70 font-medium">
+              I am currently accepting inquiries for high-performance web systems and full-stack architecture.
+            </p>
+          </motion.div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {[
-              { name: "name", type: "text", placeholder: "Your Name" },
-              { name: "email", type: "email", placeholder: "Your Email" },
-              { name: "phone", type: "tel", placeholder: "Your Phone" },
-            ].map((field) => (
-              <input
-                key={field.name}
-                type={field.type}
-                name={field.name}
-                placeholder={field.placeholder}
-                value={form[field.name]}
+          {/* Right Column: Form */}
+          <motion.div
+            ref={formRef}
+            initial={{ opacity: 0, x: 30 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8 }}
+            className="border-l border-t p-8 md:p-12"
+            style={{ borderColor: adaptiveBorder, backgroundColor: isDarkMode ? "rgba(255,255,255,0.01)" : "rgba(0,0,0,0.01)" }}
+          >
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {[
+                  { name: "name", type: "text", placeholder: "NAME" },
+                  { name: "email", type: "email", placeholder: "EMAIL ADDR" },
+                  { name: "phone", type: "tel", placeholder: "PHONE NO." },
+                ].map((field) => (
+                  <div key={field.name} className="relative group">
+                    <input
+                      type={field.type}
+                      name={field.name}
+                      placeholder={field.placeholder}
+                      value={form[field.name]}
+                      onChange={handleChange}
+                      required
+                      style={{
+                        backgroundColor: "transparent",
+                        color: theme.textMain,
+                        borderColor: adaptiveBorder,
+                      }}
+                      className="w-full p-4 border-b outline-none focus:border-b-2 transition-all font-bold tracking-widest placeholder:text-[10px] placeholder:tracking-[0.2em] placeholder:opacity-30"
+                    />
+                  </div>
+                ))}
+
+                <div className="relative">
+                  <select
+                    name="service"
+                    value={form.service}
+                    onChange={handleChange}
+                    required
+                    style={{
+                      backgroundColor: "transparent",
+                      color: theme.textMain,
+                      borderColor: adaptiveBorder,
+                    }}
+                    className="w-full p-4 border-b outline-none appearance-none font-bold tracking-widest text-[10px]"
+                  >
+                    <option value="" className="bg-slate-900 text-white">SELECT SERVICE</option>
+                    <option value="app" className="bg-slate-900 text-white">WEB APP DEV</option>
+                    <option value="frontend" className="bg-slate-900 text-white">FRONT-END UI/UX</option>
+                    <option value="backend" className="bg-slate-900 text-white">BACKEND SYSTEMS</option>
+                  </select>
+                </div>
+              </div>
+
+              <textarea
+                name="message"
+                placeholder="PROJECT DESCRIPTION"
+                rows="4"
+                value={form.message}
                 onChange={handleChange}
                 required
                 style={{
-                  backgroundColor: theme.background,
+                  backgroundColor: "transparent",
                   color: theme.textMain,
-                  borderColor: theme.border,
+                  borderColor: adaptiveBorder,
                 }}
-                className="w-full p-4 rounded-2xl border outline-none focus:border-orange-500 transition-all font-medium placeholder:opacity-50"
-              />
-            ))}
+                className="w-full p-4 border-b outline-none transition-all font-bold tracking-widest resize-none placeholder:text-[10px] placeholder:tracking-[0.2em] placeholder:opacity-30"
+              ></textarea>
 
-            <select
-              name="service"
-              value={form.service}
-              onChange={handleChange}
-              required
-              style={{
-                backgroundColor: theme.background,
-                color: theme.textMain,
-                borderColor: theme.border,
-              }}
-              className="w-full p-4 rounded-2xl border outline-none focus:border-orange-500 transition-all font-medium appearance-none"
-            >
-              <option value="">Select Service</option>
-              <option value="app">Web App Development</option>
-              <option value="frontend">Front-end UI/UX</option>
-              <option value="backend">Backend Systems</option>
-              <option value="fullstack">Full-Stack Solution</option>
-            </select>
-          </div>
+              <motion.button
+                type="submit"
+                whileHover={{ backgroundColor: theme.primary, color: "#fff" }}
+                style={{ 
+                    border: `1px solid ${theme.primary}`,
+                    color: theme.primary,
+                    backgroundColor: 'transparent'
+                }}
+                className="w-full p-5 text-[12px] font-black uppercase tracking-[0.5em] transition-all duration-300"
+              >
+                INITIALIZE MESSAGE
+              </motion.button>
+            </form>
+          </motion.div>
+        </div>
+      </div>
 
-          <textarea
-            name="message"
-            placeholder="Tell me about your vision..."
-            rows="4"
-            value={form.message}
-            onChange={handleChange}
-            required
+      <AnimatePresence>
+        {toast.show && (
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 50 }}
+            className="fixed bottom-10 left-10 p-6 border-l-4 font-black tracking-widest text-[10px] z-[1000]"
             style={{
               backgroundColor: theme.background,
               color: theme.textMain,
-              borderColor: theme.border,
+              borderColor: toast.type === "success" ? "#4ade80" : "#f87171",
+              boxShadow: "20px 20px 60px rgba(0,0,0,0.2)"
             }}
-            className="w-full p-4 rounded-2xl border outline-none focus:border-orange-500 transition-all font-medium resize-none placeholder:opacity-50"
-          ></textarea>
-
-          <motion.button
-            type="submit"
-            whileHover={{ scale: 1.02, y: -2 }}
-            whileTap={{ scale: 0.98 }}
-            style={{ backgroundColor: theme.primary }}
-            className="w-full p-5 rounded-2xl text-white font-black uppercase tracking-widest shadow-lg hover:brightness-110 transition-all mt-4"
           >
-            Send Message
-          </motion.button>
-        </form>
-
-        
-        
-        <AnimatePresence>
-          {toast.show && (
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 50 }}
-              transition={{ duration: 0.5 }}
-              style={{
-                position: "fixed",
-                bottom: 30,
-                left: "50%",
-                transform: "translateX(-50%)",
-                backgroundColor: toast.type === "success" ? "#4ade80" : "#f87171",
-                color: isDarkMode ? "#111" : "#fff",
-                padding: "1rem 2rem",
-                borderRadius: "1.5rem",
-                boxShadow: "0 10px 25px rgba(0,0,0,0.2)",
-                zIndex: 1000,
-                fontWeight: "bold",
-              }}
-            >
-              {toast.text}
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.div>
+            {toast.text}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
