@@ -12,7 +12,7 @@ const Projects = () => {
     {
       title: "Xevron",
       description: "A subscription-based design agency platform featuring high-conversion Webflow architecture and a scalable service-as-a-product business model.",
-      link: "xevron-kappa.vercel.app", 
+      link: "https://xevron-kappa.vercel.app", // Added https://
       tech: ["Webflow", "UI/UX", "Brand Strategy", "Design Systems"],
       type: "Productized Service",
       num: "01"
@@ -36,7 +36,7 @@ const Projects = () => {
     {
       title: "Vaultflow",
       description: "Enterprise analytics dashboard providing real-time data visualization, digital credit tokenization, and multi-tenant code collaboration.",
-      link: "vaultflow-nine.vercel.app",
+      link: "https://vaultflow-nine.vercel.app", // Added https://
       tech: ["React", "Analytics", "Data Vis", "Dashboard"],
       type: "B2B SaaS",
       num: "04"
@@ -67,19 +67,17 @@ const Projects = () => {
       style={{ 
         backgroundColor: theme.background,
         borderColor: isDarkMode ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)",
-        transition: "background-color 0.5s ease" 
+        transition: "background-color 0.5s ease",
+        zIndex: 1 // Explicitly set z-index
       }}
       className="relative py-32 px-6 md:px-16 lg:px-32 overflow-hidden border-t"
     >
-      {/* Centered Structural Line */}
       <div 
-        className="absolute left-1/2 top-0 w-[1px] h-full hidden lg:block opacity-20" 
+        className="absolute left-1/2 top-0 w-[1px] h-full hidden lg:block opacity-20 pointer-events-none" 
         style={{ backgroundColor: isDarkMode ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)" }} 
       />
 
       <div className="max-w-[1450px] mx-auto z-10 relative">
-        
-        {/* Header Section */}
         <div className="flex flex-col mb-24">
           <motion.div
             initial="hidden"
@@ -104,7 +102,6 @@ const Projects = () => {
           </motion.div>
         </div>
 
-        {/* Improved Project Grid */}
         <div 
           className="grid grid-cols-1 md:grid-cols-2 border-t border-l"
           style={{ borderColor: isDarkMode ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)" }}
@@ -122,13 +119,12 @@ const Projects = () => {
                 backgroundColor: "transparent"
               }}
             >
-              {/* Dynamic Hover Glow */}
               <div 
                 className="absolute inset-0 opacity-0 group-hover:opacity-[0.03] transition-opacity duration-700 pointer-events-none" 
                 style={{ backgroundColor: theme.primary }} 
               />
               
-              <div className="relative z-10">
+              <div className="relative z-20"> {/* Increased z-index for content */}
                 <div className="flex justify-between items-start mb-16">
                   <span 
                     className="text-5xl font-black leading-none select-none" 
@@ -139,8 +135,8 @@ const Projects = () => {
                   <a
                     href={project.link}
                     target="_blank"
-                    rel="noreferrer"
-                    className="p-5 border transition-all duration-500 hover:rotate-12 group-hover:scale-110"
+                    rel="noopener noreferrer"
+                    className="p-5 border transition-all duration-500 hover:rotate-12 group-hover:scale-110 relative z-30"
                     style={{ 
                         color: theme.primary, 
                         borderColor: isDarkMode ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.12)",
@@ -163,7 +159,6 @@ const Projects = () => {
                   </p>
                 </div>
 
-                {/* Tech Stack - Elevated UI */}
                 <div 
                   className="flex flex-wrap gap-x-5 gap-y-3 mt-12 pt-8 border-t"
                   style={{ borderColor: isDarkMode ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)" }}
