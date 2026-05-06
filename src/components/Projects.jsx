@@ -36,7 +36,7 @@ const Projects = () => {
     {
       title: "Vaultflow",
       description: "Enterprise analytics dashboard providing real-time data visualization, digital credit tokenization, and multi-tenant code collaboration.",
-      link: "https://vaultflow-nine.vercel.app", // Added https://
+      link: "https://vaultflow-nu.vercel.app/", 
       tech: ["React", "Analytics", "Data Vis", "Dashboard"],
       type: "B2B SaaS",
       num: "04"
