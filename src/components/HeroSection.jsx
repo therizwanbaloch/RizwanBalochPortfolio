@@ -21,24 +21,25 @@ const HeroSection = () => {
     badgeBg: isDarkMode ? "rgba(99, 102, 241, 0.1)" : "rgba(99, 102, 241, 0.05)",
   }), [isDarkMode, theme.primary]);
 
+  // Tightened floating coordinates to align closely around standard desktop viewports
   const techStack = [
-    { icon: <FaJs />, color: "#F7DF1E", x: -80, y: -250 },
-    { icon: <FaReact />, color: "#61DBFB", x: 100, y: -200 },
-    { icon: <SiFirebase />, color: "#FFCA28", x: 180, y: -80 },
-    { icon: <TbDeviceMobileCode />, color: colors.accent, x: 190, y: 80 },
-    { icon: <SiRedux />, color: "#764ABC", x: 120, y: 220 },
-    { icon: <FaNodeJs />, color: "#68A063", x: -20, y: 280 },
-    { icon: <SiMongodb />, color: "#47A248", x: -160, y: 180 },
-    { icon: <SiFramer />, color: colors.textMain, x: -190, y: 20 },
+    { icon: <FaJs />, color: "#F7DF1E", x: -60, y: -180 },
+    { icon: <FaReact />, color: "#61DBFB", x: 80, y: -160 },
+    { icon: <SiFirebase />, color: "#FFCA28", x: 160, y: -60 },
+    { icon: <TbDeviceMobileCode />, color: colors.accent, x: 170, y: 60 },
+    { icon: <SiRedux />, color: "#764ABC", x: 110, y: 160 },
+    { icon: <FaNodeJs />, color: "#68A063", x: -10, y: 200 },
+    { icon: <SiMongodb />, color: "#47A248", x: -130, y: 140 },
+    { icon: <SiFramer />, color: colors.textMain, x: -150, y: 10 },
   ];
 
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.15 } },
+    visible: { opacity: 1, transition: { staggerChildren: 0.12 } },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 25 },
+    hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } },
   };
 
@@ -47,10 +48,11 @@ const HeroSection = () => {
       id="home"
       ref={ref}
       style={{ backgroundColor: colors.bg, transition: "background-color 0.5s ease" }}
-      className="relative min-h-screen flex items-center justify-center px-6 md:px-16 lg:px-24 pt-24 pb-20 overflow-hidden isolate"
+      // FIX 1: Locked section height to calculate viewport height minus the navbar height. Removed massive py markers.
+      className="relative min-h-[calc(100vh-96px)] lg:h-[calc(100vh-96px)] flex items-center justify-center px-6 md:px-16 lg:px-24 py-12 lg:py-0 overflow-hidden isolate"
     >
       <motion.div 
-        className="w-full max-w-[1400px] grid grid-cols-1 lg:grid-cols-[60%_40%] gap-12 items-center relative z-10"
+        className="w-full max-w-[1400px] grid grid-cols-1 lg:grid-cols-[58%_42%] gap-8 items-center relative z-10"
         initial="hidden"
         animate={inView ? "visible" : "hidden"}
         variants={containerVariants}
@@ -59,7 +61,8 @@ const HeroSection = () => {
         <div className="relative z-20 flex flex-col items-center lg:items-start text-center lg:text-left pointer-events-none">
           <motion.div
             variants={itemVariants}
-            className="px-4 py-2 font-bold tracking-[0.2em] uppercase border-l-4 mb-8 text-[12px]"
+            // FIX 2: Reduced vertical spacing margin
+            className="px-4 py-1.5 font-bold tracking-[0.2em] uppercase border-l-4 mb-5 text-[11px]"
             style={{
               backgroundColor: colors.badgeBg,
               color: colors.accent,
@@ -72,7 +75,8 @@ const HeroSection = () => {
           <motion.h1
             variants={itemVariants}
             style={{ color: colors.textMain }}
-            className="text-6xl md:text-8xl lg:text-[10rem] font-extrabold tracking-tighter leading-[0.85] mb-10"
+            // FIX 3: Scaled extreme desktop font sizes down slightly (10rem -> 8.5rem) and clamped line-height spacing
+            className="text-5xl md:text-7xl lg:text-[7.5rem] xl:text-[8.5rem] font-extrabold tracking-tighter leading-[0.85] mb-6"
           >
             RIZWAN <br />
             <span className="opacity-10 italic">BALOCH</span>
@@ -81,7 +85,8 @@ const HeroSection = () => {
           <motion.p
             variants={itemVariants}
             style={{ color: colors.textSecondary, borderColor: colors.border }}
-            className="text-lg md:text-2xl font-light leading-relaxed max-w-2xl border-l-2 pl-6 mb-12"
+            // FIX 4: Adjusted margins and reduced text size for an elegant, non-overflowing paragraph block
+            className="text-base md:text-xl font-light leading-relaxed max-w-xl border-l-2 pl-5 mb-8"
           >
             Engineering <span style={{ color: colors.textMain }} className="font-semibold">scalable MERN ecosystems</span>. 
             I specialize in high-performance architectures and premium <span style={{ color: colors.accent }} className="font-bold">React Native</span> solutions.
@@ -91,36 +96,36 @@ const HeroSection = () => {
             <a
               href="#projects"
               style={{ backgroundColor: colors.accent }}
-              className="relative z-30 inline-flex px-8 py-4 text-white font-bold text-xs tracking-widest uppercase hover:brightness-110 transition-all items-center gap-3 shadow-lg shadow-indigo-500/20"
+              className="relative z-30 inline-flex px-7 py-3.5 text-white font-bold text-xs tracking-widest uppercase hover:brightness-110 transition-all items-center gap-3 shadow-lg shadow-indigo-500/20"
             >
-              EXPLORE SYSTEMS <FiArrowRight size={18} />
+              EXPLORE SYSTEMS <FiArrowRight size={16} />
             </a>
             <a
               href="/Resume.pdf"
               download
               style={{ color: colors.textMain, borderColor: colors.border }}
-              className="relative z-30 inline-flex px-8 py-4 border font-bold text-xs tracking-widest uppercase hover:bg-black/5 dark:hover:bg-white/5 transition-all items-center gap-3"
+              className="relative z-30 inline-flex px-7 py-3.5 border font-bold text-xs tracking-widest uppercase hover:bg-black/5 dark:hover:bg-white/5 transition-all items-center gap-3"
             >
-              GET RESUME <FiDownload size={18} />
+              GET RESUME <FiDownload size={16} />
             </a>
           </motion.div>
         </div>
 
         {/* IMAGE SECTION */}
-        <div className="relative z-20 flex justify-center lg:justify-end items-center pointer-events-none">
+        <div className="relative z-20 flex justify-center lg:justify-end items-center pointer-events-none mt-6 lg:mt-0">
           {/* Ambient Glow */}
           <div 
-            className="absolute w-[450px] h-[450px] rounded-full blur-[120px] opacity-20 pointer-events-none"
+            className="absolute w-[350px] h-[350px] rounded-full blur-[100px] opacity-20 pointer-events-none"
             style={{ backgroundColor: colors.accent }}
           />
 
-          {/* Floating Tech Stack */}
+          {/* Floating Tech Stack Icons */}
           {techStack.map((tech, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, scale: 0 }}
-              animate={inView ? { opacity: 0.6, scale: 1 } : {}}
-              transition={{ delay: 0.8 + i * 0.1 }}
+              animate={inView ? { opacity: 0.5, scale: 1 } : {}}
+              transition={{ delay: 0.6 + i * 0.08 }}
               className="absolute z-10 hidden lg:block pointer-events-none"
               style={{
                 color: tech.color,
@@ -129,9 +134,9 @@ const HeroSection = () => {
               }}
             >
               <motion.span 
-                className="text-4xl block"
-                animate={{ y: [0, -15, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: i * 0.5 }}
+                className="text-3xl block"
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: i * 0.4 }}
               >
                 {tech.icon}
               </motion.span>
@@ -140,17 +145,18 @@ const HeroSection = () => {
 
           {/* Profile Picture Container */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, x: 20 }}
+            initial={{ opacity: 0, scale: 0.95, x: 15 }}
             animate={inView ? { opacity: 1, scale: 1, x: 0 } : {}}
-            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-            className="relative z-30 w-full max-w-[420px] group pointer-events-auto"
+            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+            // FIX 5: Decreased container width limits to ensure structural harmony on compact screens
+            className="relative z-30 w-full max-w-[320px] xl:max-w-[360px] group pointer-events-auto"
           >
             <div 
-              className="absolute -inset-4 border border-dashed opacity-40 rotate-3 transition-all duration-700 pointer-events-none"
+              className="absolute -inset-3 border border-dashed opacity-40 rotate-3 transition-all duration-700 pointer-events-none"
               style={{ borderColor: colors.accent }}
             />
             <div 
-              className="absolute -inset-2 border border-solid opacity-30 group-hover:-rotate-3 transition-all duration-1000 pointer-events-none"
+              className="absolute -inset-1.5 border border-solid opacity-30 group-hover:-rotate-3 transition-all duration-1000 pointer-events-none"
               style={{ borderColor: colors.textMain }}
             />
 
@@ -161,8 +167,8 @@ const HeroSection = () => {
                 className="w-full h-full object-contain filter group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-[1.03]"
               />
               
-              <div className="absolute top-0 left-0 w-10 h-10 border-t-2 border-l-2 pointer-events-none" style={{ borderColor: colors.accent }} />
-              <div className="absolute bottom-0 right-0 w-10 h-10 border-b-2 border-r-2 pointer-events-none" style={{ borderColor: colors.accent }} />
+              <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 pointer-events-none" style={{ borderColor: colors.accent }} />
+              <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 pointer-events-none" style={{ borderColor: colors.accent }} />
             </div>
           </motion.div>
         </div>
