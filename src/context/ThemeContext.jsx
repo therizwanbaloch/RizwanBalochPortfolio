@@ -1,7 +1,6 @@
 import React, {
   createContext,
   useContext,
-  useState,
   useEffect,
 } from "react";
 
@@ -28,29 +27,18 @@ const themeColors = {
 
 
 const ThemeProvider = ({ children }) => {
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  const isDarkMode = false;
+  const theme = themeColors.light;
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem("portfolio-theme");
-    if (savedTheme) {
-      setIsDarkMode(savedTheme === "dark");
+    try {
+      localStorage.removeItem("portfolio-theme");
+    } catch {
+      // Ignore if localStorage is unavailable
     }
   }, []);
 
-  const toggleTheme = () => {
-    setIsDarkMode((prev) => {
-      const newMode = !prev;
-      localStorage.setItem(
-        "portfolio-theme",
-        newMode ? "dark" : "light"
-      );
-      return newMode;
-    });
-  };
-
-  const theme = isDarkMode
-    ? themeColors.dark
-    : themeColors.light;
+  const toggleTheme = () => {};
 
   return (
     <ThemeContext.Provider

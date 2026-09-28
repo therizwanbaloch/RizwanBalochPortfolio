@@ -1,5 +1,4 @@
 import React from "react";
-import { motion } from "framer-motion";
 import { FiLinkedin, FiGithub, FiMessageCircle } from "react-icons/fi";
 import useTheme from "../context/ThemeContext";
 

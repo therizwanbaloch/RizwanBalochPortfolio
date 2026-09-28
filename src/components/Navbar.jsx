@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { FiMenu, FiX, FiSun, FiMoon, FiArrowUpRight } from "react-icons/fi";
+import { FiMenu, FiX, FiArrowUpRight } from "react-icons/fi";
 import useTheme from "../context/ThemeContext";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { theme, isDarkMode, toggleTheme } = useTheme();
+  const { theme, isDarkMode } = useTheme();
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -86,10 +86,7 @@ const Navbar = () => {
               ))}
             </div>
 
-            <div className="flex items-center gap-8 border-l pl-10" style={{ borderColor: isDarkMode ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)" }}>
-              <button onClick={toggleTheme} style={{ color: theme.textMain }} className="opacity-50 hover:opacity-100">
-                {isDarkMode ? <FiSun size={19} /> : <FiMoon size={19} />}
-              </button>
+            <div className="flex items-center border-l pl-10" style={{ borderColor: isDarkMode ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)" }}>
               <a
                 href="/Resume.pdf"
                 className="group flex items-center gap-3 font-bold text-[10px] uppercase tracking-[0.3em] px-8 py-4 transition-all relative"
@@ -101,11 +98,8 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Toggle */}
-          <div className="flex items-center gap-6 md:hidden">
-            <button onClick={toggleTheme} style={{ color: theme.textMain }} className="opacity-60">
-              {isDarkMode ? <FiSun size={22} /> : <FiMoon size={22} />}
-            </button>
-            <button onClick={toggleMenu} style={{ color: theme.textMain }} className="relative z-[120]">
+          <div className="flex items-center md:hidden">
+            <button onClick={toggleMenu} style={{ color: theme.textMain }} className="relative z-[120]" aria-label="Toggle menu">
               {isOpen ? <FiX size={28} /> : <FiMenu size={28} />}
             </button>
           </div>
