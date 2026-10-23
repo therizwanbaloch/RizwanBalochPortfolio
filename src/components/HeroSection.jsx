@@ -4,7 +4,7 @@ import { FiArrowRight, FiDownload } from "react-icons/fi";
 import { FaReact, FaNodeJs, FaJs } from "react-icons/fa";
 import { SiMongodb, SiFirebase, SiFramer, SiRedux } from "react-icons/si";
 import { TbDeviceMobileCode } from "react-icons/tb";
-import profilePic from "../assets/Profile.png"; 
+import profilePic from "../assets/Profile.webp"; 
 import useTheme from "../context/ThemeContext";
 
 const HeroSection = () => {
